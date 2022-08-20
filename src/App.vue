@@ -40,7 +40,7 @@ export default {
       const card = [...firstCard, ...secondCard];
       card.sort(() => Math.random() - 0.5);
       this.setting.cardContent = card;
-      this.setting.endTime = data.totalOfBlocks * 20;
+      this.setting.endTime = data.totalOfBlocks * 10;
       this.status = 'interact';
     },
     onHandleBack(data) {

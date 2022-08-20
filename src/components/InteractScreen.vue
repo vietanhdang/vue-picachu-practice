@@ -27,7 +27,7 @@
         <v-dialog v-model="dialog" persistent max-width="290">
             <v-card>
                 <v-card-title class="text-h5">
-                    Time's up!
+                    {{ message }}
                 </v-card-title>
                 <v-card-actions>
                     <v-spacer></v-spacer>
@@ -64,6 +64,8 @@ export default {
         isDisabled: false,
         timerCount: 0,
         dialog: false,
+        done: [],
+        message: '',
     }),
     mounted() {
         this.timerCount = this.cards.endTime;
@@ -75,6 +77,11 @@ export default {
                     setTimeout(() => {
                         this.timerCount--;
                         if (this.timerCount == 0) {
+                            this.message = 'Time Up';
+                            this.dialog = true;
+                        }
+                        if (this.done.length == this.cards.cardContent.length) {
+                            this.message = 'You Win';
                             this.dialog = true;
                         }
                     }, 1000);
@@ -92,6 +99,8 @@ export default {
                 if (this.rules[0].value == this.rules[1].value) {
                     this.$refs[`cardIndex-${this.rules[0].index}`][0].onDisableCard();
                     this.$refs[`cardIndex-${this.rules[1].index}`][0].onDisableCard();
+                    this.done.push(this.rules[0].index);
+                    this.done.push(this.rules[1].index);
                     this.isDisabled = false;
                     this.rules = [];
                 } else {
