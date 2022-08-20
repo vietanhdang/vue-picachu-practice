@@ -3,8 +3,7 @@
     <MainScreenVue v-if="status === 'main'" @on-start="onHandleStart" />
     <InteractScreen v-if="status === 'interact'" :cards="setting" @on-back="onHandleBack"
       @on-restart="onHandleRestart" />
-    <h1>This game create by Vue.js - <a href="https://www.facebook.com/anhdv47/">Việt Anh</a></h1>
-
+    <AudioAutoPlay ref="audio" />
   </v-app>
 </template>
 
@@ -13,11 +12,13 @@
 
 import MainScreenVue from './components/MainScreen.vue';
 import InteractScreen from './components/InteractScreen.vue';
+import AudioAutoPlay from './components/AudioAutoPlay.vue';
 export default {
   name: 'App',
   components: {
     MainScreenVue,
     InteractScreen,
+    AudioAutoPlay,
   },
   data: () => ({
     setting: {
@@ -27,11 +28,6 @@ export default {
     },
     status: 'main',
   }),
-  watch: {
-    timerCount() {
-      console.log(this.timerCount);
-    }
-  },
   methods: {
     onHandleStart(data) {
       this.setting.totalOfBlocks = data.totalOfBlocks;
@@ -42,6 +38,10 @@ export default {
       this.setting.cardContent = card;
       this.setting.endTime = data.totalOfBlocks * 10;
       this.status = 'interact';
+      this.isPlaying = this.$refs.audio.isPlaying;
+      if (!this.$refs.audio.isPlaying) {
+        this.$refs.audio.playAudio();
+      }
     },
     onHandleBack(data) {
       this.status = data;
@@ -52,20 +52,7 @@ export default {
         this.onHandleStart(data);
       }, 0);
     },
+
   }
 }
 </script>
-<style scoped>
-h1 {
-  z-index: 1;
-  color: var(--light);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-h1 a {
-  color: cadetblue
-}
-</style>
