@@ -1,9 +1,11 @@
 <template>
     <v-main class="screen">
         <div class="screen__inner" :style="{
-            width: `${(((920 - 16 * 4) / Math.sqrt(cards.cardContent.length) - 16) * 3 / 4 + 16) *
-                Math.sqrt(cards.cardContent.length)}px`,
-        
+            width: `${((((960 - 16 * 4) / Math.sqrt(cards.cardContent.length) - 16) * 3) / 4 +
+                16) *
+                Math.sqrt(cards.cardContent.length)
+                }px`,
+            height: `100vh`,
         }">
             <v-card class="timer">
                 <v-card-title>
@@ -56,6 +58,7 @@ export default {
     components: {
         Card,
     },
+
     data: () => ({
         rules: [],
         isDisabled: false,
@@ -144,13 +147,15 @@ export default {
     bottom: 0;
     left: 0;
     z-index: 2;
-    background-color: var(--dark);
+    background: url('../assets/images/41380.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--light);
 }
 
 .screen__inner {
-    width: calc(424px);
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 2rem auto;
 }

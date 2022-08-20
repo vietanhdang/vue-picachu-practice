@@ -1,7 +1,10 @@
 <template>
     <v-main class="card" :class="{ 'disable': isDisabled }" :style="{
-        height: `${((920 - 16 * 4) / Math.sqrt(cardContext.length) - 16)}px`,
-        width: `${((920 - 16 * 4) / Math.sqrt(cardContext.length) - 16) * 3 / 4}px`,
+        height: `${(650 - 16 * 4) / Math.sqrt(cardContext.length) - 16}px`,
+        width: `${(((960 - 16 * 4) / Math.sqrt(cardContext.length) - 16) * 3) / 4
+            }px`,
+        perspective: `${((((960 - 16 * 4) / Math.sqrt(cardContext.length) - 16) * 3) / 4) * 2
+            }px`,
     }">
         <div :class="['card__inner', { 'is-flipped': isFlipped }]" @click="toggleCard()">
             <div class="card__face card__face--front">
@@ -59,8 +62,6 @@ export default {
     display: inline-block;
     margin-right: 1rem;
     margin-bottom: 1rem;
-    width: 90px;
-    height: 120px;
 }
 
 .card__inner {

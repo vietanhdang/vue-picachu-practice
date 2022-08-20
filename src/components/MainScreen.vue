@@ -1,6 +1,6 @@
 <template>
-    <v-main class="screen-main">
-        <h1>Pokemon Game</h1>
+    <div class="screen-main">
+        <h1>Pikachu Flipping Game</h1>
         <h3>Select mode to play</h3>
         <div class="actions">
             <v-btn class="btn-primary ma-4" @click="onStart(16)" color="primary" size="x-large">
@@ -20,7 +20,7 @@
                 <span>Very Hard</span>
             </v-btn>
         </div>
-    </v-main>
+    </div>
 </template>
 
 <script>
@@ -50,7 +50,8 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: var(--dark);
+    background: url('@/assets/images/40180.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--light);
 }
 
